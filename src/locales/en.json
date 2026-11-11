@@ -1,0 +1,38 @@
+{
+  "common": {
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "done": "Done",
+    "upgrade": "Upgrade to Pro",
+    "pro": "Pro"
+  },
+  "onboarding": {
+    "title": "Welcome",
+    "subtitle": "Replace this onboarding with your app's value proposition.",
+    "start": "Get started"
+  },
+  "home": {
+    "title": "Home",
+    "subtitle": "Your app starts here.",
+    "proActive": "Pro is active",
+    "freePlan": "Free plan"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "haptics": "Vibration",
+    "purchases": "Purchases",
+    "restore": "Restore purchases",
+    "restored": "Purchases restored",
+    "nothingToRestore": "No purchases found",
+    "support": "Support",
+    "contact": "Contact support",
+    "rate": "Rate the app",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "version": "Version {{version}}"
+  }
+}

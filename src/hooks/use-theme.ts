@@ -1,14 +1,13 @@
+import { useColorScheme } from 'nativewind';
+
+import { THEME } from '@/lib/theme';
+
 /**
- * Learn more about light and dark modes:
- * https://docs.expo.dev/guides/color-schemes/
+ * Current color scheme + JS color values. Prefer Tailwind classes (`bg-card`, `text-primary`);
+ * use `colors` only where classes can't go (icon `color` props, native Switch, charts).
  */
-
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
 export function useTheme() {
-  const scheme = useColorScheme();
-  const theme = scheme === 'dark' ? 'dark' : 'light';
-
-  return Colors[theme];
+  const { colorScheme } = useColorScheme();
+  const scheme: 'light' | 'dark' = colorScheme === 'dark' ? 'dark' : 'light';
+  return { scheme, isDark: scheme === 'dark', colors: THEME[scheme] };
 }
