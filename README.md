@@ -35,7 +35,7 @@ and the links in `src/config/app-config.ts`.
 | Secrets / tokens | expo-secure-store | — |
 | In-app purchases + paywall | react-native-purchases (+ -ui) / RevenueCat | `src/lib/purchases.ts`, `useIsPro()` |
 | Analytics, errors, feature flags | posthog-react-native | `src/lib/analytics.ts` → `track()` |
-| Styling | NativeWind v4 (Tailwind CSS 3) — `className="p-4 bg-card"` | `src/global.css`, `tailwind.config.js` |
+| Styling | NativeWind v5 RC (Tailwind CSS 4) — `className="p-4 bg-card"` | `src/global.css` (theme lives in CSS, no tailwind.config) |
 | UI components | React Native Reusables (shadcn/ui for RN) + `cn()` helper | `src/components/ui/` |
 | Backend (optional) | Convex (realtime DB, server functions, files, auth) | `src/lib/convex.ts` (null if no URL) |
 | Server data fetching | @tanstack/react-query | `src/lib/query-client.ts` |
@@ -60,7 +60,7 @@ src/
   app/            screens (every file is a route) — _layout, onboarding, index (home), settings
   components/ui/  Reusables (button, text, separator, switch, ...) + Screen, ListRow/ListSection
   config/         app-config.ts — per-app name, links, entitlement id
-  global.css      Tailwind + color variables (light/dark) — rebrand here
+  global.css      Tailwind imports, color variables (light/dark) and @theme tokens — rebrand here
   hooks/          useTheme (scheme + JS colors for icons)
   lib/            services: db, storage, purchases, analytics, convex, i18n, notifications, haptics, review,
                   theme (JS colors + navigation theme), utils (cn)

@@ -1,7 +1,9 @@
 const { getDefaultConfig } = require('expo/metro-config');
-const { withNativeWind } = require('nativewind/metro');
+const { withNativewind } = require('nativewind/metro');
 
+/** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
 
-// inlineRem: 16 matches web sizing, which React Native Reusables components expect.
-module.exports = withNativeWind(config, { input: './src/global.css', inlineRem: 16 });
+// Nativewind v5 finds the CSS through the import in src/app/_layout.tsx (no `input` option).
+// The native rem size is set in src/global.css (`:root { font-size: 16px }`).
+module.exports = withNativewind(config);

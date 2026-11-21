@@ -2,9 +2,9 @@ import '@/lib/i18n';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ConvexProvider } from 'convex/react';
-import { useColorScheme } from 'nativewind';
 import { PostHogProvider } from 'posthog-react-native';
 import { useEffect, type ReactNode } from 'react';
+import { Appearance } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -21,15 +21,15 @@ migrateDatabase();
 /** Every app-wide provider lives here, so `_layout.tsx` stays clean. */
 export function AppProviders({ children }: { children: ReactNode }) {
   const themePreference = useSettingsStore((s) => s.themePreference);
-  const { setColorScheme } = useColorScheme();
-
   useEffect(() => {
     initPurchases();
   }, []);
 
+  // Native light/dark override; 'unspecified' goes back to following the system.
+  // (On web, dark mode follows the browser's prefers-color-scheme.)
   useEffect(() => {
-    setColorScheme(themePreference);
-  }, [themePreference, setColorScheme]);
+    Appearance.setColorScheme(themePreference === 'system' ? 'unspecified' : themePreference);
+  }, [themePreference]);
 
   let tree = (
     <GestureHandlerRootView style={{ flex: 1 }}>

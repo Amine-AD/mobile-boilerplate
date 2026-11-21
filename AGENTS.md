@@ -38,12 +38,16 @@ Docs: https://docs.expo.dev/eas/index.md
 
 - Per-app values live in `src/config/app-config.ts`. Colors live in `src/global.css` (CSS variables) with a JS
   copy in `src/lib/theme.ts`; never hardcode colors in screens.
+- Styling is NativeWind v5 (RC) + Tailwind CSS v4: tokens are defined in `src/global.css` (`@theme inline`); there is no
+  `tailwind.config.js`. Dark mode is `@media (prefers-color-scheme: dark)` driven by `Appearance.setColorScheme()`;
+  read the scheme with `useColorScheme` from `react-native` (never from `nativewind`). Docs: https://www.nativewind.dev/v5
 - Style with NativeWind `className` using the shadcn tokens (`bg-background`, `bg-card`, `text-foreground`,
   `text-muted-foreground`, `bg-primary`, `border-border`, ...). Merge classes with `cn()` from `@/lib/utils`.
   Use `useTheme().colors` only where classes can't go (icon `color` props).
 - UI primitives come from React Native Reusables: add them with
   `npx @react-native-reusables/cli@latest add <name> --styling-library nativewind` (lands in `src/components/ui/`).
   Text inside `Button` must be wrapped in `<Text>` from `@/components/ui/text`.
+  Reusables ships Tailwind 3 class names: convert them to v4 after adding (`shadow-sm`→`shadow-xs`, `outline-none`→`outline-hidden`, ...).
 - Backend is Convex (`src/lib/convex.ts`), only when an app needs one; auth via Convex Auth.
 - App-wide providers go in `src/providers/app-providers.tsx`, not `_layout.tsx`.
 - Services are wrapped in `src/lib/*` and must stay optional: a missing env key disables the feature, never crashes.

@@ -1,33 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind CSS v4 + Nativewind v5. Keep utilities unlayered so React Native Web defaults can't override them. */
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
+
+@import 'nativewind/theme';
 
 /*
- * App colors (HSL without "hsl()"). Change these per app — every component follows.
+ * App colors. Change these per app — every component follows.
  * Use in code as Tailwind classes: bg-primary, text-muted-foreground, border-border, ...
- * Keep in sync with the JS copy in src/constants/theme.ts (used where classes can't go, e.g. icons).
+ * Keep in sync with the JS copy in src/lib/theme.ts (used where classes can't go, e.g. icons).
  */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 4%;
-  --card: 240 5% 96%;
-  --card-foreground: 240 10% 4%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 4%;
-  --primary: 210 87% 53%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 240 5% 96%;
-  --secondary-foreground: 240 6% 10%;
-  --muted: 240 5% 96%;
-  --muted-foreground: 220 6% 40%;
-  --accent: 240 5% 90%;
-  --accent-foreground: 240 6% 10%;
-  --destructive: 358 75% 59%;
-  --destructive-foreground: 0 0% 100%;
-  --success: 151 55% 42%;
-  --border: 240 6% 90%;
-  --input: 240 6% 90%;
-  --ring: 210 87% 53%;
+  /* 1rem = 16 on native too (Nativewind's native default is 14); React Native Reusables expects web sizing. */
+  font-size: 16px;
+
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(240 10% 4%);
+  --card: hsl(240 5% 96%);
+  --card-foreground: hsl(240 10% 4%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 10% 4%);
+  --primary: hsl(210 87% 53%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(240 5% 96%);
+  --secondary-foreground: hsl(240 6% 10%);
+  --muted: hsl(240 5% 96%);
+  --muted-foreground: hsl(220 6% 40%);
+  --accent: hsl(240 5% 90%);
+  --accent-foreground: hsl(240 6% 10%);
+  --destructive: hsl(358 75% 59%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --success: hsl(151 55% 42%);
+  --border: hsl(240 6% 90%);
+  --input: hsl(240 6% 90%);
+  --ring: hsl(210 87% 53%);
   --radius: 12px;
 
   /* Web fonts (from the Expo template) */
@@ -40,25 +46,56 @@
   --font-serif: Georgia, 'Times New Roman', serif;
 }
 
-.dark:root {
-  --background: 0 0% 0%;
-  --foreground: 0 0% 100%;
-  --card: 225 5% 14%;
-  --card-foreground: 0 0% 100%;
-  --popover: 225 5% 10%;
-  --popover-foreground: 0 0% 100%;
-  --primary: 209 90% 63%;
-  --primary-foreground: 0 0% 0%;
-  --secondary: 225 5% 14%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 225 5% 14%;
-  --muted-foreground: 215 6% 71%;
-  --accent: 214 7% 19%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 80% 65%;
-  --destructive-foreground: 0 0% 100%;
-  --success: 151 65% 54%;
-  --border: 214 7% 19%;
-  --input: 214 7% 19%;
-  --ring: 209 90% 63%;
+/* Dark mode follows the system, or the in-app override set with Appearance.setColorScheme(). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(0 0% 0%);
+    --foreground: hsl(0 0% 100%);
+    --card: hsl(225 5% 14%);
+    --card-foreground: hsl(0 0% 100%);
+    --popover: hsl(225 5% 10%);
+    --popover-foreground: hsl(0 0% 100%);
+    --primary: hsl(209 90% 63%);
+    --primary-foreground: hsl(0 0% 0%);
+    --secondary: hsl(225 5% 14%);
+    --secondary-foreground: hsl(0 0% 100%);
+    --muted: hsl(225 5% 14%);
+    --muted-foreground: hsl(215 6% 71%);
+    --accent: hsl(214 7% 19%);
+    --accent-foreground: hsl(0 0% 100%);
+    --destructive: hsl(0 80% 65%);
+    --destructive-foreground: hsl(0 0% 100%);
+    --success: hsl(151 65% 54%);
+    --border: hsl(214 7% 19%);
+    --input: hsl(214 7% 19%);
+    --ring: hsl(209 90% 63%);
+  }
+}
+
+/* Tailwind tokens. Color names follow shadcn/ui, so React Native Reusables components drop in. */
+@theme inline {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
