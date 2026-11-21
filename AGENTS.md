@@ -41,6 +41,10 @@ Docs: https://docs.expo.dev/eas/index.md
 - Styling is NativeWind v5 (RC) + Tailwind CSS v4: tokens are defined in `src/global.css` (`@theme inline`); there is no
   `tailwind.config.js`. Dark mode is `@media (prefers-color-scheme: dark)` driven by `Appearance.setColorScheme()`;
   read the scheme with `useColorScheme` from `react-native` (never from `nativewind`). Docs: https://www.nativewind.dev/v5
+  `className` only works on React Native's own components. Third-party components need a `styled()` wrapper
+  (see `src/components/ui/safe-area-view.tsx`) — otherwise the class is silently ignored.
+  metro.config.js carries a workaround so expo-asset (fonts, icons, images) gets the real `react-native`; keep it
+  until react-native-css exports `AssetRegistry`.
 - Style with NativeWind `className` using the shadcn tokens (`bg-background`, `bg-card`, `text-foreground`,
   `text-muted-foreground`, `bg-primary`, `border-border`, ...). Merge classes with `cn()` from `@/lib/utils`.
   Use `useTheme().colors` only where classes can't go (icon `color` props).

@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { ScrollView, View } from 'react-native';
-import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
+import type { Edge } from 'react-native-safe-area-context';
+
+import { SafeAreaView } from '@/components/ui/safe-area-view';
 
 import { cn } from '@/lib/utils';
 
